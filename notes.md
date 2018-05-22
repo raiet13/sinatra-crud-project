@@ -18,3 +18,5 @@ imdbfilmdistribution-cli-app <<-- Used for Readme updates
 
 -------
 Used Links
+
+https://github.com/learn-co-curriculum/example-sinatra-assessment/blob/master/app/controllers/application_controller.rb
