@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
+
   has_secure_password
   validates_presence_of :username, :password, :email
   has_many :playlists
+  has_many :playlist_objects, through: :playlists
 
   def slug
     self.username.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')

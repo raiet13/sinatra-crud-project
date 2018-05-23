@@ -2,7 +2,7 @@ class Playlist < ActiveRecord::Base
 
   validates_presence_of :user_id, :name
   belongs_to :user
-  has_many :objects
+  has_many :playlist_objects
 
   def slug
     self.name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')

@@ -1,0 +1,4 @@
+class Book < Object
+
+
+end
