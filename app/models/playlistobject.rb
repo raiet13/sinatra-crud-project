@@ -1,4 +1,4 @@
-class PlaylistObjects < ActiveRecord::Base
+class PlaylistObject < ActiveRecord::Base
 
   validates_presence_of :name
   has_many :playlists
