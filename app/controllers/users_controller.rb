@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     # puts "Get Sign Up Route"
     if logged_in?
       # puts "User Already Logged In"
-      redirect to "/tweets"
+      redirect to "/users/show_user"
     else
       # puts "Allow Sign Up"
       erb :'/users/create_user'
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 		if user.save
       # puts "saved user -> load tweets page"
       session[:user_id] = user.id
-      redirect to "/tweets"
+      redirect to "/users/show_user"
 		else
       # puts "FAILURE TO SAVE USER"
 			redirect to "/signup"
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     # puts "Get Login Route"
     if logged_in?
       # puts "User Already Logged In"
-      redirect to "/tweets"
+      redirect to "/users/show_user"
     else
       # puts "Allow Log In"
       erb :'/users/login'
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     if user && user.authenticate(params[:password])
       # puts "User Successfully logged in"
       session[:user_id] = user.id
-      redirect to "/tweets"
+      redirect to "/users/show_user"
     else
       # puts "FAILURE TO FIND USER"
       redirect to "/login"
@@ -52,27 +52,22 @@ class UsersController < ApplicationController
 
   get '/logout' do
     # puts "Log Out Route"
+    # redirect_if_not_logged_in
+    # session.clear
     if logged_in?
       # puts "Allow Log Out"
       session.clear
     # else
     #   puts "User Not Logged In"
     end
-    redirect to "/login"
+    redirect to "/users/login"
   end
 
   get '/users/:slug' do
     puts "User Show Route"
+    redirect_if_not_logged_in
     @user = User.find_by_slug(params[:slug])
-    erb :'/users/show'
-    # if logged_in?
-    #   puts "User = #{session[:user_id]}"
-    #   @user = User.find(session[:user_id])
-    #   erb :'/users/show'
-    # else
-    #   puts "User Not Logged In"
-    #   redirect to "/login"
-    # end
+    erb :'/users/show_user'
   end
 
 end
