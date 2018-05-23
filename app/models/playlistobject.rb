@@ -1,11 +1,10 @@
 class PlaylistObject < ActiveRecord::Base
 
-  validates_presence_of :name
   has_many :playlists
   has_many :users, through: :playlists
 
   def slug
-    self.name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+    self.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   end
 
   def self.find_by_slug(slug)
